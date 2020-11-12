@@ -1,17 +1,15 @@
 import React from 'react';
-import { MdHome, MdPerson, MdDateRange, MdAdd } from 'react-icons/md'
+import { MdHome, MdPerson, MdDateRange } from 'react-icons/md'
 import { 
     Header,
     TopBar,
     LogoBar,
-    ButtonsBar,
-    Section,
-    BtnContainer
+    ButtonsBar
 } from './styles';
 
 import { Link } from 'react-router-dom';
 
-const PageHeader: React.FC = (props) => {
+function PageHeader() {
     return (
         <>
             <Header>
@@ -26,16 +24,7 @@ const PageHeader: React.FC = (props) => {
                     </ButtonsBar>
                 </TopBar>
             </Header>
-            <Section>
-                <BtnContainer>
-                    <button>
-                        <MdAdd />
-                        Novo
-                    </button>
-                    <hr/>
-                </BtnContainer>
-                <div></div>                
-            </Section>
+            
         </>
     );
 }
