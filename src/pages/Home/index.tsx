@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { MdAdd } from 'react-icons/md';
 import PageHeader from '../../components/PageHeader';
 import ProjectLink from '../../components/ProjectLink';
@@ -10,6 +10,8 @@ import {
 } from "./styles";
 
 function Home() {
+  
+
   return (
     <>
       <PageHeader />
@@ -22,10 +24,6 @@ function Home() {
           <hr />
         </BtnContainer>
         <ProjectsList>
-          <ProjectLink />
-          <ProjectLink />
-          <ProjectLink />
-          <ProjectLink />
           <ProjectLink />
         </ProjectsList>
       </Section>

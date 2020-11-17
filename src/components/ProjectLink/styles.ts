@@ -3,6 +3,7 @@ import styled from 'styled-components';
 export const ProjectContainer = styled.div`
     width: 24.0rem;
     height: 13.0rem;
+    cursor: pointer;
    
     border-radius: 2px;
     background: var(--color-items);

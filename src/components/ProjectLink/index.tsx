@@ -6,7 +6,7 @@ import ReduceLines from '../../utils/reduceLines';
 
 const ProjectLink: React.FC = () => {
 
-  const text = 'Initial description in this project   its so terible! Do you want to remake  please! helpe me, i nead this, is all inead, so please! make this and go '
+  const text = 'Initial description in this project   its so terible! Do you want to remake  please! helpe me, i nead this, is all inead, so please! make this and go nkjkhgkj cjuygvujhy'
 
   ReduceLines(text);
   return (
