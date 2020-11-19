@@ -1,22 +1,30 @@
 import React from 'react';
 import { ProjectContainer } from './styles';
-import ReduceLines from '../../utils/reduceLines';
+// import ReduceLines from '../../utils/reduceLines';
+import RefactorDates from '../../utils/refectorDates';
 
 // import { Container } from './styles';
 
-const ProjectLink: React.FC = () => {
+interface ProjectProps {
+  id: number;
+	name: string;
+	//modify_date: Date;
+	create_date: Date;
+}
 
-  const text = 'Initial description in this project   its so terible! Do you want to remake  please! helpe me, i nead this, is all inead, so please! make this and go nkjkhgkj cjuygvujhy'
+const ProjectLink: React.FC<ProjectProps> = (props) => {
 
-  ReduceLines(text);
+  // const text = 'Initial description in this project   its so terible! Do you want to remake  please! helpe me, i nead this, is all inead, so please! make this and go nkjkhgkj cjuygvujhy'
+
+  // ReduceLines(text);
+  // console.log(props.name);
   return (
-      <ProjectContainer>
-        <h5>Projeto TCC 02</h5>
+      <ProjectContainer key={ props.id }>
+        <h5>{ props.name }</h5>
         <p>
-          {ReduceLines(text)}
         </p>
-
-        <span>20/10/2020</span>
+        <span>{ RefactorDates(String(props.create_date)) }</span>
+        {props.children}
 
       </ProjectContainer>
   );
