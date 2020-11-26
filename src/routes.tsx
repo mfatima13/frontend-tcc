@@ -12,7 +12,7 @@ function Routes() {
             <Switch>
                 <Route component={Login} path="/" exact />
                 <Route component={Home} path="/home" />
-                <Route component={Project} path="/project" />
+                <Route component={Project} path="/project/:id" />
                 <Route component={SingUp} path="/singup" />
             </Switch>
         </BrowserRouter>

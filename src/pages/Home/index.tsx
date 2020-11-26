@@ -28,7 +28,7 @@ const Home: React.FC = () => {
 	//console.log(data);
 
 	if (!data) {
-		return <p>Carregando...</p>
+		return <p style={{margin: 80}}>Carregando...</p>
 	}
 
 	return (
