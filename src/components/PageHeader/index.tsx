@@ -9,11 +9,19 @@ import {
 } from './styles';
 
 import { Link } from 'react-router-dom';
+import api from '../../services/api';
 
 function PageHeader() {
 
-    function logout() {
-        console.log("click");
+    const token = localStorage.getItem("token");
+
+    async function logout() {
+        const res = await api.post("/users-api/rest-auth/logout/", {
+            token
+        });
+        console.log(res);
+
+        localStorage.removeItem("token");
 
     };
 
