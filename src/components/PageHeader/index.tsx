@@ -16,13 +16,11 @@ function PageHeader() {
     const token = localStorage.getItem("token");
 
     async function logout() {
-        const res = await api.post("/users-api/rest-auth/logout/", {
+        await api.post("/users-api/rest-auth/logout/", {
             token
         });
-        console.log(res);
 
         localStorage.removeItem("token");
-
     };
 
     return (

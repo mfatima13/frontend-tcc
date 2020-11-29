@@ -1,6 +1,7 @@
 import axios from 'axios';
-import { convertCompilerOptionsFromJson } from 'typescript';
 import getCookie from '../utils/getCookie';
+
+// interface Response
 
 const api = axios.create({
     baseURL: 'http://localhost:8000',
@@ -10,17 +11,16 @@ const api = axios.create({
 });
 
 api.interceptors.request.use(async (config) => {
-    //const token = getCookie("csrftoken");
     const user = localStorage.getItem('token');
 
-    // console.log(token);
     if (user) {
         config.headers.Authorization = `Token ${user}`;
 
-    } else {
+    } /*else {
         console.log("não há token")
     }
     //console.log(config);
+    */
     return config;
 });
 

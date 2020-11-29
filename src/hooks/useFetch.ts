@@ -8,5 +8,5 @@ export function useFetch<Data = any, Error = any>(url: string, user: number) {
     });
     //console.log(user);
 
-    return { data, error }
+    return { data, error };
 };

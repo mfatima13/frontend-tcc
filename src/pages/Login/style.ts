@@ -43,13 +43,9 @@ export const Input = styled.input`
     font-size: 1.6rem;
     font-weight: 700;
     color: var(--color-text);
-
-    :hover {
-        border: 0.23rem solid var(--color-btn-login);
-    }
     
     :focus {
-        border: 0.23rem solid var(--color-btn-login);
+        border: 0.23rem solid var(--color-btn-login-dark);
     }
 `;
 

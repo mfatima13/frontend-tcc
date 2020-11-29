@@ -22,7 +22,7 @@ const ProjectLink: React.FC<ProjectProps> = (props) => {
   // console.log(props.name);
   return (
       <Link to={`/project/${props.id}`} style={{textDecoration: 'none'}}>
-        <ProjectContainer key={ props.id }>
+        <ProjectContainer>
           <h5>{ props.name }</h5>
          
           <span>{ RefactorDates(String(props.create_date)) }</span>
