@@ -9,18 +9,14 @@ import {
 } from './styles';
 
 import { Link } from 'react-router-dom';
-import api from '../../services/api';
+import { useAuth } from '../../contexts/auth';
 
 function PageHeader() {
 
-    const token = localStorage.getItem("token");
+    const { signOut } = useAuth();
 
     async function logout() {
-        await api.post("/users-api/rest-auth/logout/", {
-            token
-        });
-
-        localStorage.removeItem("token");
+        signOut();
     };
 
     return (

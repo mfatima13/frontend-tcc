@@ -1,4 +1,4 @@
-import React, { FormEvent, useState, useContext } from 'react';
+import React, { FormEvent, useState } from 'react';
 import { 
   Container, 
   Img, 
@@ -8,16 +8,14 @@ import {
   RegisterLink 
 } from './style';
 import landing from '../../assets/images/animatioEdit.png';
-import { useHistory } from 'react-router-dom';
 
-import AuthContext from '../../contexts/auth';
+import { useAuth } from '../../contexts/auth';
 
 const Login: React.FC = () => {  
-  const history = useHistory();
   const [username, setUsername] = useState('');
   const [password, setPassword] = useState('');
 
-  const { signIn, signed } = useContext(AuthContext);
+  const { signIn, signed } = useAuth();
 
   console.log(signed);
 
@@ -25,7 +23,7 @@ const Login: React.FC = () => {
     event.preventDefault();
 
     signIn(username, password);
-    
+
   }
   
   return (

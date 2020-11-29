@@ -2,29 +2,51 @@ import React, { createContext, useState, useEffect, useContext } from 'react';
 
 import api from '../services/api';
 
+import { useToast } from '../hooks/ToastContext';
+
 interface AuthContextData {
     signed: boolean;
     user: string | null;
     signIn(username: string, password: string): Promise<void>;
+    signOut(): Promise<void>;
 }
 
 const AuthContext = createContext<AuthContextData>({} as AuthContextData);
 
-export const AuthProvider: React.FC = ({ children }) => { 
+export const AuthProvider: React.FC = ({ children }) => {
     const [user, setUser] = useState<string | null>(null);
+    const { addToast, removeToast } = useToast();
 
     async function signIn(username: string, password: string) {
-    
-        const response = await api.post('/users-api/rest-auth/login/', {
-          "username": username,
-          "password": password,
+
+        try {
+            const response = await api.post('/users-api/rest-auth/login/', {
+                "username": username,
+                "password": password,
+            });
+
+            const { key } = response.data;
+            setUser(response.data);
+            console.log(user);
+            localStorage.setItem('token', key);
+
+        } catch (error) {
+            addToast({
+                type: 'error',
+                title: 'Erro na autenticação',
+                description: 'Usuário ou senha invalida!'
+            });
+        }
+    }
+
+    async function signOut() {
+        const token = localStorage.getItem('token');
+        await api.post("/users-api/rest-auth/logout/", {
+            token
         });
-        
-        const { key } = response.data;
-        setUser(response.data);
-        console.log(user);
-        localStorage.setItem('token', key);
-    
+
+        localStorage.removeItem("token");
+        setUser(null);
     }
 
     useEffect(() => {
@@ -33,10 +55,10 @@ export const AuthProvider: React.FC = ({ children }) => {
         if (token) {
             setUser(token);
         }
-    },[]);
-    
+    }, []);
+
     return (
-        <AuthContext.Provider value={{signed: !!user, user, signIn}}>
+        <AuthContext.Provider value={{ signed: !!user, user, signIn, signOut }}>
             {children}
         </AuthContext.Provider>
     )
