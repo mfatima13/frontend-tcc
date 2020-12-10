@@ -1,10 +1,15 @@
 import React from 'react';
 
-// import { Container } from './styles';
+import PageHeader from '../../components/PageHeader';
+
+import { SubMenu } from './styles';
 
 function Project() {
   return (
-    <h2>Project</h2>
+    <>
+      <PageHeader />
+      <SubMenu />
+    </>
   );
 }
 

@@ -2,7 +2,7 @@ import React, { createContext, useState, useEffect, useContext } from 'react';
 
 import api from '../services/api';
 
-import { useToast } from '../hooks/ToastContext';
+import { useToast } from './ToastContext';
 
 interface AuthContextData {
     signed: boolean;
@@ -15,7 +15,7 @@ const AuthContext = createContext<AuthContextData>({} as AuthContextData);
 
 export const AuthProvider: React.FC = ({ children }) => {
     const [user, setUser] = useState<string | null>(null);
-    const { addToast, removeToast } = useToast();
+    const { addToast } = useToast();
 
     async function signIn(username: string, password: string) {
 
@@ -27,7 +27,6 @@ export const AuthProvider: React.FC = ({ children }) => {
 
             const { key } = response.data;
             setUser(response.data);
-            console.log(user);
             localStorage.setItem('token', key);
 
         } catch (error) {

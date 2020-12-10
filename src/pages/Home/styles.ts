@@ -1,13 +1,22 @@
 import styled from 'styled-components';
 
+export const Page = styled.div`
+    margin: 0;
+    padding: 0;
+    display: block;
+    box-sizing: border-box;
+    height: 100%;
+    width: 100%;
+`;
+
 export const Section = styled.div`
     display: grid;
     grid-template-columns: 1fr;
     justify-content: center;
     align-items: center;
     margin: 0 8rem;
-    min-height: 70%;
-    //border: 2px solid red;
+    min-height: 40%;
+    // border: 2px solid red;
 
 `;
 
@@ -49,7 +58,7 @@ export const BtnContainer = styled.div`
 `;
 
 export const ProjectsList = styled.div`
-    //border: 2px solid green;
+    // border: 2px solid green;
     display: grid;
     grid-template-columns: 1fr 1fr 1fr 1fr;
     grid-gap: 3rem 2rem;

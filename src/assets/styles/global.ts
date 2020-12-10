@@ -9,7 +9,14 @@ export default createGlobalStyle`
         --color-text: #828282;
         --color-btn-login: #9E1946;
         --color-btn-login-dark: #91153C;
+        --color-btn-login-light: #BE2B5D;
         --color-text-btn-login: #E6E6E6;
+
+        --color-input-border: #C02E63;
+
+        --color-modal-label: #3A3A3A;
+        --color-modal-input: #F4F4F4;
+        --color-hover-del: #ea524d;
 
         --color-menu-barra: #9E1946;
         --color-submenu-barra: #A33057;

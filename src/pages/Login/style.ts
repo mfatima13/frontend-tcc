@@ -1,11 +1,20 @@
-import styled from 'styled-components';
+import styled, { keyframes } from 'styled-components';
 
+const appearFromLeft = keyframes`
+    from {
+        opacity: 0;
+        transform: translateX(-50px);
+    }
+    to {
+        opacity: 1;
+        transform: translateX(1);
+    }
+`;
 
 export const Container = styled.div`
-    margin: 6rem auto;
+    margin: 4rem auto;
     height: 50rem;
     width: 110rem;
-    // border: 1px solid red;
     display: grid;
     align-items: center;
     justify-content: center;
@@ -13,13 +22,27 @@ export const Container = styled.div`
     grid-template-columns: 1fr 1fr;
 
     div.formContainer {
-        margin-top: 80px;
+        margin-top: 20px;
         display: flex;
         flex-direction: column;
         align-items: center;
-        justify-content: center
+        justify-content: center; 
+        animation: ${appearFromLeft} 1s;       
     }
     
+`;
+
+export const LogoContainer = styled.div`
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    margin-bottom: 3rem;
+
+    img {
+        height: 170px;
+        width: 170px;
+    }
 `;
 
 export const Img = styled.img`
@@ -91,7 +114,7 @@ export const RegisterLink = styled.div`
     flex-direction: row;
     justify-content: center;
     align-items: center;
-    margin-top: 80px;
+    margin-top: 55px;
 
     span {
         color: var(--color-text);

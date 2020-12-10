@@ -4,10 +4,12 @@ import PageHeader from '../../components/PageHeader';
 import ProjectLink from '../../components/ProjectLink';
 import { useFetch } from '../../hooks/useFetch';
 
+import Modal from '../../components/ModalCreateProject';
+
 import {
 	Section,
 	BtnContainer,
-	ProjectsList
+	ProjectsList,
 } from "./styles";
 
 interface Project {
@@ -17,29 +19,35 @@ interface Project {
 	create_date: Date;
 };
 
-interface User {
-	id: number
+export interface Modal {
+	show: boolean;
 }
 
 const Home: React.FC = () => {
+	const [showModal, setShowModal] = useState<Boolean>(false);
 	const [projects, setProjects] = useState<Project[]>([]);
 
 	const { data } = useFetch<Project[]>('/team-api/members/teams/', 2);
-	//console.log(data);
 
 	if (!data) {
-		return <p style={{margin: 80}}>Carregando...</p>
+		return <p style={{ margin: 80 }}>Carregando...</p>
 	}
+
+	const openModal = () => {
+		setShowModal(prev => !prev);
+	};
 
 	return (
 		<>
+			<Modal showModal={showModal} setShowModal={setShowModal} />
 			<PageHeader />
+
 			<Section>
 				<BtnContainer>
-					<button>
+					<button onClick={openModal}>
 						<MdAdd />
-								Novo
-						</button>
+						Novo
+					</button>
 					<hr />
 				</BtnContainer>
 
@@ -48,7 +56,7 @@ const Home: React.FC = () => {
 						return (
 							<ProjectLink
 								key={itens.id}
-								id={itens.id} 
+								id={itens.id}
 								name={itens.name}
 								create_date={itens.create_date}
 							/>

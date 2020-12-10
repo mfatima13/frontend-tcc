@@ -9,7 +9,7 @@ import {
 } from './styles';
 
 import { Link } from 'react-router-dom';
-import { useAuth } from '../../contexts/auth';
+import { useAuth } from '../../hooks/AuthContext';
 
 function PageHeader() {
 
@@ -33,7 +33,7 @@ function PageHeader() {
                         <Dropdown>
                             <button><MdPerson /><MdArrowDropDown /></button>
                             <div className='dropdown-content'>
-                                <Link to="/" onClick={logout}>
+                                <Link to="/">
                                     <MdPersonOutline />
                                     Perfil
                                 </Link>
@@ -42,9 +42,7 @@ function PageHeader() {
                                     Logout
                                 </Link>
                             </div>
-                        </Dropdown>
-                        
-                        
+                        </Dropdown>                        
                     </ButtonsBar>
                 </TopBar>
             </Header>

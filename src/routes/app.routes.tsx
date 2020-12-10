@@ -10,7 +10,6 @@ import SingUp from '../pages/SingUp';
 
 const AppRoutes: React.FC = () => {
 
-    console.log("entrou no app")
     return (
         <Switch>
             <Route component={Login} path="/" exact />
@@ -18,10 +17,7 @@ const AppRoutes: React.FC = () => {
             <Route component={Home} path="/home" exact isPrivate />
             <Route component={Project} path="/project/:id" isPrivate />
         </Switch>
-
     );
-
-
 }
 
 export default AppRoutes;

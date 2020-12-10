@@ -54,7 +54,7 @@ export const Container = styled(animated.div)<ToastProps>`
     }
 
     button {
-        position: abrsolute;
+        position: absolute;
         right: 16px;
         top: 19px;
         opacity: 0.6;

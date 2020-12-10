@@ -1,11 +1,7 @@
 import React from 'react';
-import { ProjectContainer } from './styles';
-// import ReduceLines from '../../utils/reduceLines';
+import { ProjectContainer, TrashButton } from './styles';
 import RefactorDates from '../../utils/refectorDates';
 import { Link } from 'react-router-dom';
-import { title } from 'process';
-
-// import { Container } from './styles';
 
 interface ProjectProps {
   id: number;
@@ -23,8 +19,13 @@ const ProjectLink: React.FC<ProjectProps> = (props) => {
   return (
       <Link to={`/project/${props.id}`} style={{textDecoration: 'none'}}>
         <ProjectContainer>
-          <h5>{ props.name }</h5>
-         
+          <div>
+            <h5>{ props.name }</h5>
+            <button>
+              <TrashButton />
+            </button>
+
+          </div>
           <span>{ RefactorDates(String(props.create_date)) }</span>
           {props.children}
         </ProjectContainer>
