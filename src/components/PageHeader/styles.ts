@@ -8,7 +8,7 @@ export const Header = styled.header`
 
 export const TopBar = styled.div`
     width: 90%;
-    height: 8rem;
+    height: 7rem;
     margin: 0 auto;
     display: grid;
     grid-template-columns: 1fr 1fr;

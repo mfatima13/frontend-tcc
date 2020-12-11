@@ -21,7 +21,6 @@ export const TrashButton = styled(MdDelete)`
 export const ProjectContainer = styled.div`
     width: 24.0rem;
     height: 13.0rem;
-    cursor: pointer;
     color: var(--color-text-items);
     text-decoration-color: none;
    
@@ -43,8 +42,8 @@ export const ProjectContainer = styled.div`
         grid-template-columns: 10fr 1fr;
 
         button {
-            height: 20px;
-            width: 20px;
+            height: 25px;
+            width: 25px;
             background: var(--color-items);
             border: 0;
         }
@@ -58,6 +57,7 @@ export const ProjectContainer = styled.div`
         margin: 0;
         font-size: 1.6rem;
         color: var(--color-text-items);
+        cursor: pointer;
     }
 
     span {

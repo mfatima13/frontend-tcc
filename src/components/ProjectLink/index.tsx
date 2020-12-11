@@ -1,35 +1,41 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { ProjectContainer, TrashButton } from './styles';
 import RefactorDates from '../../utils/refectorDates';
 import { Link } from 'react-router-dom';
+import ModalDeleteProject from '../ModalDeleteProject';
 
 interface ProjectProps {
   id: number;
-	name: string;
-	//modify_date: Date;
-	create_date: Date;
+  name: string;
+  //modify_date: Date;
+  create_date: Date;
 }
 
+
 const ProjectLink: React.FC<ProjectProps> = (props) => {
+  const [showModalDelete, setShowModalDelete] = useState<Boolean>(false);
 
-  // const text = 'Initial description in this project   its so terible! Do you want to remake  please! helpe me, i nead this, is all inead, so please! make this and go nkjkhgkj cjuygvujhy'
+  const openModal = () => {
+		setShowModalDelete(prev => !prev);
+	};
 
-  // ReduceLines(text);
-  // console.log(props.name);
   return (
-      <Link to={`/project/${props.id}`} style={{textDecoration: 'none'}}>
-        <ProjectContainer>
-          <div>
-            <h5>{ props.name }</h5>
-            <button>
-              <TrashButton />
-            </button>
+    <>
+      <ModalDeleteProject showModal={showModalDelete} setShowModal={setShowModalDelete} id={props.id}/>
+      <ProjectContainer>
+        <div>
+          <Link to={`/project/${props.id}`} key={props.id} style={{ textDecoration: 'none' }}>
+            <h5>{props.name}</h5>
+          </Link>
+          <button onClick={openModal}>
+            <TrashButton />
+          </button>
 
-          </div>
-          <span>{ RefactorDates(String(props.create_date)) }</span>
-          {props.children}
-        </ProjectContainer>
-      </Link>
+        </div>
+        <span>{RefactorDates(String(props.create_date))}</span>
+        {props.children}
+      </ProjectContainer>
+    </>
   );
 }
 
