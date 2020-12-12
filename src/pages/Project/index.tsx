@@ -1,8 +1,15 @@
 import React from 'react';
-
+import { MdDashboard, MdStarBorder } from 'react-icons/md';
+import { FaCodeBranch, FaNetworkWired, FaUserFriends } from 'react-icons/fa';
 import PageHeader from '../../components/PageHeader';
 
-import { SubMenu, ButtonsContainer, Container } from './styles';
+import { 
+  SubMenu, 
+  ButtonsContainer, 
+  Container, 
+  ContentBoard,
+  ContentToDo
+} from './styles';
 
 function Project() {
   return (
@@ -11,16 +18,19 @@ function Project() {
       <SubMenu>
         <Container>
 
-          <h3>Projeto tal</h3>
+          <h3>Projeto tal <MdStarBorder /></h3>
           <ButtonsContainer>
-            <button>Board</button>
-            <button>Pull</button>
-            <button>Team</button>
-            <button>Calender</button>
+            <button>Board <MdDashboard /></button>
+            <button>Pull <FaCodeBranch /></button>
+            <button>Team <FaUserFriends /></button>
+            <button>Projeto <FaNetworkWired /></button>
           </ButtonsContainer>
         </Container>
 
       </SubMenu>
+      <ContentBoard>
+        <ContentToDo />
+      </ContentBoard>
     </>
   );
 }
