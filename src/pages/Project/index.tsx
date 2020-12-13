@@ -2,22 +2,24 @@ import React from 'react';
 import { MdDashboard, MdStarBorder } from 'react-icons/md';
 import { FaCodeBranch, FaNetworkWired, FaUserFriends } from 'react-icons/fa';
 import PageHeader from '../../components/PageHeader';
+import KanbanBoard from '../../components/KanbanBoard';
+
+import api from '../../services/api';
 
 import { 
   SubMenu, 
   ButtonsContainer, 
-  Container, 
-  ContentBoard,
-  ContentToDo
+  Container
 } from './styles';
 
 function Project() {
+  
   return (
     <>
       <PageHeader />
       <SubMenu>
-        <Container>
 
+        <Container>
           <h3>Projeto tal <MdStarBorder /></h3>
           <ButtonsContainer>
             <button>Board <MdDashboard /></button>
@@ -28,9 +30,7 @@ function Project() {
         </Container>
 
       </SubMenu>
-      <ContentBoard>
-        <ContentToDo />
-      </ContentBoard>
+      <KanbanBoard />
     </>
   );
 }

@@ -61,21 +61,3 @@ export const ButtonsContainer = styled.div`
         }
     }
 `;
-
-export const ContentBoard = styled.div`
-    min-height: 50rem;
-    width: 100%;
-    // border: 2px solid red;
-    padding: 2rem 5rem;
-    display: flex;
-    flex-direction: column;
-    gap: 2rem;
-`;
-
-export const ContentToDo = styled.div`
-    min-height: 45rem;
-    width: 25rem;
-    background: var(--color-todo-background);
-    //box-shadow: -2px 2px 4px rgba(149, 152, 153, 0.21);
-    border-radius: 4px;  
-`;
