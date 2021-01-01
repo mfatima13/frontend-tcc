@@ -25,9 +25,10 @@ export interface Modal {
 
 const Home: React.FC = () => {
 	const [showModal, setShowModal] = useState<Boolean>(false);
-	const [projects, setProjects] = useState<Project[]>([]);
+	const [projects, setProjects] = useState<[Project]>();
 
-	const { data } = useFetch<Project[]>('/team-api/members/teams/', 2);
+	const { data } = useFetch<Project[]>('/team-api/members/teams/');
+	// setProjects(data);
 
 	if (!data) {
 		return <p style={{ margin: 80 }}>Carregando...</p>

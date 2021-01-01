@@ -1,5 +1,9 @@
 import styled from 'styled-components';
 
+interface TaskPriority {
+    priority?: string;
+}
+
 export const Container = styled.div`
     display: flex;
     flex-direction: column;
@@ -24,10 +28,10 @@ export const LineDiv = styled.hr`
     background: #8F8F8F;
 `;
 
-export const LineCategory = styled.hr`
+export const LineCategory = styled.hr<TaskPriority>`
     height: 0.7rem;
     width: 100%;
-    background: #DD9B9B;
+    background: ${props => props.priority};
     border-radius: 4px;
     border: 0;
 `;

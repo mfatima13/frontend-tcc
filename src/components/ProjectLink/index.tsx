@@ -24,7 +24,7 @@ const ProjectLink: React.FC<ProjectProps> = (props) => {
       <ModalDeleteProject showModal={showModalDelete} setShowModal={setShowModalDelete} id={props.id}/>
       <ProjectContainer>
         <div>
-          <Link to={`/project/${props.id}`} key={props.id} style={{ textDecoration: 'none' }}>
+          <Link to={`/project/${props.id}/`} key={props.id} style={{ textDecoration: 'none' }}>
             <h5>{props.name}</h5>
           </Link>
           <button onClick={openModal}>

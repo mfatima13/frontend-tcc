@@ -89,3 +89,9 @@ export const TaskContent = styled.div`
     flex-direction: column;
     gap: 1rem;
 `;
+
+export const taskIten = styled.div`
+    margin: 0;
+    padding: 0;
+    border: 1px solid green;
+`;

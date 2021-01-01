@@ -1,6 +1,6 @@
 import React, { FormEvent, useRef, useState } from 'react';
 import { useSpring } from 'react-spring';
-
+import { mutate } from 'swr';
 import api from '../../services/api';
 
 import { Background, CloseModalButton, FormContainer, ModalWrapper } from './styles';
@@ -22,6 +22,7 @@ const ModalCreateProject: React.FC<ModalProps> = ({
   setShowModal,
   ...rest
 }) => {
+  const [team, setTeams] = useState<TeamFormProps[]>();
   const [name, setName] = useState('');
   const [create_date, setCreate_date] = useState('');
   const [modify_date, setModify_date] = useState('');
@@ -60,6 +61,9 @@ const ModalCreateProject: React.FC<ModalProps> = ({
 
     setName("");
     setShowModal(false);
+    setTeams(response.data);
+    const id = response.data.id;
+    mutate('/team-api/members/teams/', team); // The mutate update de cache relative for the url
     console.log(response, res);
   }
 

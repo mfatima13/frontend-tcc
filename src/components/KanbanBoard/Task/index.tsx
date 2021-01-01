@@ -6,16 +6,25 @@ import {
   LineCategory
 } from './styles';
 
-const Task: React.FC = () => {
+export interface TaskProps {
+  name: string;
+  description?: string;
+  completed: false;
+  priority: string;
+	toDo: number;
+  order?: number;
+  id: number;
+}
+
+const Task: React.FC<TaskProps> = (props) => {
   return (
     <Container>
-      <LineCategory />
+      <LineCategory priority={props.priority} />
       <div>
-        <h3>Tarefa 01</h3>
+        <h3>{props.name}</h3>
         <LineDiv />
-        <p>A EaD, pela sua característica de amplitude e pelo 
-          uso de tecnologias modernas, representa uma nova forma
-          de aprender, respeitando, sempre, o seu tempo.
+        <p>
+          {props.description}
         </p>
       </div>
       

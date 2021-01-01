@@ -1,6 +1,8 @@
 import React, { FormEvent, useRef } from 'react';
 import { useSpring } from 'react-spring';
 
+import { mutate } from 'swr';
+
 import api from '../../services/api';
 import { Background, CloseModalButton, FormContainer, ModalWrapper } from './styles';
 
