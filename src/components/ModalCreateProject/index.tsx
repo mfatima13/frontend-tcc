@@ -54,7 +54,7 @@ const ModalCreateProject: React.FC<ModalProps> = ({
       modify_date,
       members,
     });
-    const res = await api.post('/team-api/members/membership/', {
+    await api.post('/team-api/members/membership/', {
       "user" : user,
       "team" : response.data.id,
     })
@@ -62,9 +62,9 @@ const ModalCreateProject: React.FC<ModalProps> = ({
     setName("");
     setShowModal(false);
     setTeams(response.data);
-    const id = response.data.id;
+    // const id = response.data.id;
     mutate('/team-api/members/teams/', team); // The mutate update de cache relative for the url
-    console.log(response, res);
+    // console.log(response, res);
   }
 
   return (

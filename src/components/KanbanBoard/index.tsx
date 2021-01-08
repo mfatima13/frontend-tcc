@@ -2,10 +2,6 @@ import React, { useEffect, useState } from 'react';
 import {
   DragDropContext,
   Droppable,
-  Draggable,
-  DragDropContext as DragDropContextTask,
-  Droppable as DroppableTask,
-  Draggable as DraggableTask,
   DropResult
 } from 'react-beautiful-dnd';
 
@@ -17,26 +13,15 @@ import api from '../../services/api';
 
 import {
   ContentBoard,
-  ContentToDo,
-  HeadToDo,
-  TaskContent,
   AddToDo,
-  taskIten,
 } from './styles';
 
 import {
   useParams
 } from "react-router-dom";
 
-import Task, { TaskProps } from './Task';
-
-interface Todo {
-  name: string;
-  created_at: string;
-  id: number;
-  order: number;
-  tasks: [TaskProps];
-}
+import ToDo, { Todo } from './ToDo';
+import Tasks, { TaskProps } from './Task';
 
 interface Params {
   id?: string;
@@ -44,6 +29,7 @@ interface Params {
 
 const KanbanBoard: React.FC = () => {
   const [todos, setTodos] = useState<[Todo]>();
+  const [tasks, setTasks] = useState<[TaskProps]>(); // Gonna be use this for reoder itens on interface
   const { id } = useParams<Params>();
 
   useEffect(() => {
@@ -64,96 +50,55 @@ const KanbanBoard: React.FC = () => {
     return <p style={{ margin: 80 }}>Carregando...</p>
   }
 
-  const onDragEndToDo = async (result: DropResult) => {
+  const onDragEnd = async (result: DropResult) => {
     console.log(result);
+    
+    if (!result.destination) return;
     const { draggableId } = result;
     const { destination } = result;
     const realDestination = destination?.index ? destination?.index + 1 : result.source.index;
-    // console.log(realDestination);
     const response = await api.post(`/project-api/todos/${draggableId}/move/`, {
       "order": realDestination
     });
-    /*todos.map((todo) => {
-      //console.log("id do todo", todo.id, "draggableId: ", Number(draggableId));
-      // (todo.order = realDestination) && setTodos(todos) 
-      if (todo.id === Number(draggableId)){
-        const todoMoved = todo;
-       } else { setTodos(todos) };
-    });
-    const dest = result.destination?.index | null;
-    const todoMoved = todos[result.source.droppableId];
-    const [removed] = todos.splice(result.source.index, 1);
-    todos.splice(dest, 0, removed);
-    setTodos({
-      ...todos,
-      [result.source.droppableId]: {
-        ...todoMoved
-      }
-    });
-    */
-    console.log(todos);
+
+    const items = todos
+    const [reoderedItem] = items.splice(result.source.index, 1);
+    items.splice(result.destination.index, 0, reoderedItem);
+
+    setTodos(items);
+    
+    // console.log(todos);
   }
 
   return (
-    <>
-      <DragDropContext onDragEnd={(results) => onDragEndToDo(results)} >
-        <Droppable droppableId={String(ContentBoard)} direction="horizontal">
+      <DragDropContext onDragEnd={(results) => onDragEnd(results)} >
+        <Droppable 
+          droppableId="all-colluns" 
+          direction="horizontal"
+          type="column"
+        >
           {(provided) => (
-            <ContentBoard {...provided.droppableProps} ref={provided.innerRef}>
-              { todos?.map((iten, index=iten.order) => (
-                <Draggable key={iten.order} draggableId={String(iten.id)} index={index}>
-                  {(provided) => (
-                    <ContentToDo {...provided.draggableProps} ref={provided.innerRef}>
-                      <HeadToDo {...provided.dragHandleProps}>
-                        <h4>
-                          {iten.name}
-                          <button><MdAdd /> </button>
-                          <button><MdMoreVert /> </button>
-                        </h4>
-                      </HeadToDo>
-
-                      <DragDropContextTask onDragEnd={(results) => { console.log(results) }}>
-                        <DroppableTask droppableId={String(TaskContent)}>
-                          {(provided) => (
-                            <TaskContent {...provided.droppableProps} ref={provided.innerRef}>
-                              {iten.tasks?.map((task, index) => (
-                                <DraggableTask key={task.id} draggableId={String(task.id)} index={index}>
-                                  {(provided) => (
-                                    <div {...provided.draggableProps} ref={provided.innerRef} 
-                                      {...provided.dragHandleProps}>
-                                      <Task                                    
-                                        key={task.order}
-                                        id={task.id}
-                                        name={task.name}
-                                        description={task.description}
-                                        priority={task.priority}
-                                        toDo={task.toDo}
-                                        order={task.order}
-                                        completed={task.completed}
-                                      />
-                                    </div>
-                                  )}
-                                </DraggableTask>
-                              ))}
-                            </TaskContent>
-                          )}
-
-                        </DroppableTask>
-
-                      </DragDropContextTask>
-
-                    </ContentToDo>
-                  )}
-                </Draggable>
+            <ContentBoard 
+              {...provided.droppableProps} 
+              ref={provided.innerRef}
+            >
+              {todos?.map((iten, index) => (
+                <ToDo 
+                  key={iten.id}
+                  name={iten.name}
+                  order={iten.order}
+                  created_at={iten.created_at}
+                  tasks={iten.tasks}
+                  id={iten.id}
+                  index={index}
+                />
               ))}
-              <AddToDo>Nova Lista <MdAdd /></AddToDo>
               {provided.placeholder}
+              <AddToDo>Nova Lista <MdAdd /></AddToDo>
             </ContentBoard>
           )}
         </Droppable>
       </DragDropContext>
-
-    </>
   );
 }
 
