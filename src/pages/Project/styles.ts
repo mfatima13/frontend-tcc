@@ -41,9 +41,11 @@ export const ButtonsContainer = styled.div`
     align-items: flex-end;
     button {
         height: 2.6rem;
-        width: 8.2rem;
-        padding: 2px;
+        width: 8.2rem;        
+        padding: 4px;
         border: 0;
+        padding-left: 7px;
+        padding-right: 4px;
         background: var(--color-btn-submenu);
         color: var(--color-text-btn-submenu);
         font-size: 1.4rem;
@@ -51,7 +53,7 @@ export const ButtonsContainer = styled.div`
         cursor: pointer;   
         display: flex;
         flex-direction: row;
-        justify-content: center;
+        justify-content: space-between;
         align-items: center;
         gap: 0.7rem;
 
