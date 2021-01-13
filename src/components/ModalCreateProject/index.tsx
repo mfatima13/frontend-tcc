@@ -57,7 +57,7 @@ const ModalCreateProject: React.FC<ModalProps> = ({
     await api.post('/team-api/members/membership/', {
       "user" : user,
       "team" : response.data.id,
-    })
+    });
 
     setName("");
     setShowModal(false);
