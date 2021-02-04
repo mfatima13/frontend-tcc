@@ -11,7 +11,6 @@ interface ProjectProps {
   create_date: Date;
 }
 
-
 const ProjectLink: React.FC<ProjectProps> = (props) => {
   const [showModalDelete, setShowModalDelete] = useState<Boolean>(false);
 

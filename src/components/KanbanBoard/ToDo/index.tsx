@@ -16,25 +16,33 @@ import {
 } from './styles';
 
 import Task, { TaskProps } from '../Task';
+import ModalCreateTask from '../../ModalCreateTask';
 
 export interface Todo {
   name: string;
   created_at: string;
-  id: number;
+  id: string;
   order: number;
   tasks?: [TaskProps];
   index: number;
 }
 
 const ToDo: React.FC<Todo> = (props) => {
+  const [showModalCreateTask, setShowModalCreateTask] = useState<Boolean>(false);
+
+  const openModal = () => {
+    console.log('modal click');
+    setShowModalCreateTask(prev => !prev);
+  };
+
   return (
-    <Draggable draggableId={String(props.id)} index={props.index}>
+    <Draggable draggableId={props.id} index={props.index}>
       {(provided) => (
         <ContentToDo {...provided.draggableProps} ref={provided.innerRef}>
           <HeadToDo>
             <h4 {...provided.dragHandleProps}>
               {props.name}
-              <button><MdAdd /> </button>
+              <button onClick={openModal}><MdAdd /> </button>
               <button><MdMoreVert /> </button>
             </h4>
           </HeadToDo>
@@ -47,19 +55,22 @@ const ToDo: React.FC<Todo> = (props) => {
                 {...snapshot.isDraggingOver}
               >
                 {props.tasks?.map((task, index) => (
-                  <Task
-                    index={index}
-                    key={task.id}
-                    id={task.id}
-                    name={task.name}
-                    description={task.description}
-                    priority={task.priority}
-                    toDo={task.toDo}
-                    order={task.order}
-                    completed={task.completed}
-                  />
+                  <>
+                    <Task
+                      index={index}
+                      key={task.id}
+                      id={task.id}
+                      name={task.name}
+                      description={task.description}
+                      priority={task.priority}
+                      toDo={task.toDo}
+                      order={task.order}
+                      completed={task.completed}
+                    />
+                  </>
                 ))}
                 {provided.placeholder}
+                <ModalCreateTask showModal={showModalCreateTask} setShowModal={setShowModalCreateTask} todoId={props.id} />
               </TaskContent>
             )}
           </Droppable>

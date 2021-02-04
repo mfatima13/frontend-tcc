@@ -17,13 +17,13 @@ export interface TaskProps {
   priority: string;
 	toDo: number;
   order: number;
-  id: number;
+  id: string;
   index: number;
 }
 
 const Task: React.FC<TaskProps> = (props) => {
   return (
-    <Draggable draggableId={props.name} index={props.index}>
+    <Draggable draggableId={props.id} index={props.index}>
       {(provided) => (
         <Container 
           {...provided.draggableProps} 

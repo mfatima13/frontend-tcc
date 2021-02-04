@@ -8,21 +8,20 @@ import {
   useParams
 } from "react-router-dom";
 
-
 import { Background, CloseModalButton, FormContainer, ModalWrapper } from './styles';
 
 interface ModalProps {
+  todoId: string;
   showModal: Boolean;
   setShowModal(Modal: Boolean): void;
 }
 
-interface TodoForm {
+interface TaskProps {
   name: string;
-  created_at?: string;
-  id?: number;
-  order?: number;
-  tasks?: [];
-  index: number;
+  description?: string;
+  completed: false;
+  priority: string;
+	toDo: number;
 }
 
 interface Params {
@@ -32,9 +31,12 @@ interface Params {
 const ModalCreateToDo: React.FC<ModalProps> = ({
   showModal,
   setShowModal,
+  todoId,
   ...rest
 }) => {
   const [name, setName] = useState('');
+  const [descricao, setDescricao] = useState('');
+  const [priority, setPriority] = useState('');
   const { id } = useParams<Params>();
 
   const modalRef = useRef(null);
@@ -58,20 +60,19 @@ const ModalCreateToDo: React.FC<ModalProps> = ({
     console.log(format(data, "yyyy-MM-dd"));
     
     // call api 
-    const res = await api.post('/project-api/todos/', {
-      "name": name,
-      "group": id,
-      "initDate": "",
-      "endDate": format(data, "yyyy-MM-dd"),
-      "order": null
+    const res = await api.post('/project-api/task/', {
+      name: name,
+      description: descricao,
+      completed: false,
+      priority: priority,
+      toDo: todoId,
+
     });
     console.log(res);
-    
-
     setName("");
+    setDescricao("");
     setShowModal(false);
   }
-
 
   return (
     <>
@@ -83,12 +84,14 @@ const ModalCreateToDo: React.FC<ModalProps> = ({
               onClick={() => (setShowModal(false))}
             />
             <FormContainer>
-              <h2>Crie uma nova lista de Tarefas</h2>
+              <h2>Crie uma nova Tarefa</h2>
               <div>
-                <label htmlFor="">Dê um nome para sua lista:</label>
+                <label htmlFor="">Dê um titulo para a tarefa:</label>
                 <input type="text" name="name" value={name} onChange={e => setName(e.target.value)} />
-                <label htmlFor="">Agora faça uma breve descrição da lista:</label>
-                <textarea id="" name="description" />
+                <label htmlFor="">Agora faça uma descrição da tarefa:</label>
+                <textarea id="" name="description" value={descricao} onChange={e => setDescricao(e.target.value)} />
+                <label htmlFor="">Selecione uma cor para priorizar:</label>
+                <input type="color" name="" id="" value={priority} onChange={e =>setPriority(e.target.value)}/>
                 <button onClick={handleSubmit}>Criar</button>
               </div>
 
@@ -96,7 +99,6 @@ const ModalCreateToDo: React.FC<ModalProps> = ({
           </ModalWrapper>
         </Background>
       ) : null}
-
 
     </>
   );

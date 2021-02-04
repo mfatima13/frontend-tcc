@@ -19,7 +19,8 @@ export const AddToDo = styled.button`
     height: 2.8rem;
     width: 12rem;
     border-radius: 12px;
-    margin-left: 6rem;
+    margin-left: 8rem;
+    margin-top: 1rem;
     border: 1px solid #9E1946;
     color: #9E1946;
     font-weight: bold;
